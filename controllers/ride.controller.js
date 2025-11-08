@@ -31,7 +31,7 @@ module.exports.createRide = async (req, res) => {
         console.log(rideWithUser);
 
         captainsInRadius.map(captain => {
-            console.log("these are the captains to be ride eitted ",captain)
+            // console.log("these are the captains to be ride eitted ",captain)
             sendMessageToSocketId(captain.socketId, {
                 event: 'new-ride',
                 data: rideWithUser
@@ -57,7 +57,7 @@ module.exports.getFare = async (req, res) => {
 
     try {
         const fare = await rideService.getFare(pickup, destination);
-        console.log("this is fare returned-->",fare);
+        // console.log("this is fare returned-->",fare);
         return res.status(200).json(fare);
     } catch (err) {
         return res.status(500).json({ message: err.message });
@@ -99,7 +99,7 @@ module.exports.startRide = async (req, res) => {
     try {
         const ride = await rideService.startRide({ rideId, otp, captain: req.captain });
 
-        console.log(ride);
+        // console.log(ride);
 
         sendMessageToSocketId(ride.user.socketId, {
             event: 'ride-started',
